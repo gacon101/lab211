@@ -42,12 +42,13 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method addVocabulary(). 
-     * This method will be add new vocabulary into the list. 
-     * In this method have parameter.
+     * Method addVocabulary(). This method will be add new vocabulary into the
+     * list. In this method have parameter.
+     *
      * @param en This parameter will be catch the value input of user.
      * @param vn This parameter will be catch the value input of user.
-     * @return ++numberOfVocabulary This return will be count number of word in the dictionary.
+     * @return ++numberOfVocabulary This return will be count number of word in
+     * the dictionary.
      */
     public int addVocabulary(String en, String vn) {
         this.listVocabulary.add(new Vocabulary(en, vn));
@@ -55,16 +56,16 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method loadDictionaryFile(). 
-     * This method will load data file for system.
-     * This method will read file data and add data from file to listOfUser. 
-     * In this method use: 
-     * + Method exist(): to check file is exist or not. 
-     * + Method createNewFile(): to create file if file not exist in the system. 
-     * + Object BufferedReader: will read data in file data. 
-     * + Method sleep: will delay program.
+     * Method loadDictionaryFile(). This method will load data file for system.
+     * This method will read file data and add data from file to listOfUser. In
+     * this method use: + Method exist(): to check file is exist or not. +
+     * Method createNewFile(): to create file if file not exist in the system. +
+     * Object BufferedReader: will read data in file data. + Method sleep: will
+     * delay program.
+     *
      * @throws IOException This exception will throw when IO system crash.
-     * @throws InterruptedException This exception will throw when system interrupt crash.
+     * @throws InterruptedException This exception will throw when system
+     * interrupt crash.
      */
     public void loadDictionaryFile() throws IOException, InterruptedException {
         File f = new File(this.DICTIONARY_FILE);  // Object file will create to scan file data.
@@ -98,14 +99,16 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method saveDictionaryFile(). 
-     * This method will save data in to file data of system. 
-     * This method will scan the listOfUser and write data in to file data of system. 
-     * In this method use: + Object FileWriter: to scan file data and write data. 
-     * + Method append(): will write data into file data.
-     * + Method sleep: will delay program. + Method close(): will stop write file data.
+     * Method saveDictionaryFile(). This method will save data in to file data
+     * of system. This method will scan the listOfUser and write data in to file
+     * data of system. In this method use: + Object FileWriter: to scan file
+     * data and write data. + Method append(): will write data into file data. +
+     * Method sleep: will delay program. + Method close(): will stop write file
+     * data.
+     *
      * @throws IOException This exception will throw when IO system crash.
-     * @throws InterruptedException This exception will throw when system interrupt crash.
+     * @throws InterruptedException This exception will throw when system
+     * interrupt crash.
      */
     public void saveDictionaryFile() throws IOException, InterruptedException {
         FileWriter fw = new FileWriter(DICTIONARY_FILE);  // Create FileWriter to write data into file data.
@@ -134,10 +137,9 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method putVocabularyToDictionary(). 
-     * This method will use HashMap to processing all data in the ArrayList. 
-     * In this method will use: 
-     * + Method put(): to put data from ArrayList to HashMap.
+     * Method putVocabularyToDictionary(). This method will use HashMap to
+     * processing all data in the ArrayList. In this method will use: + Method
+     * put(): to put data from ArrayList to HashMap.
      */
     public void putVocabularyToDictionary() {
         for (int i = 0; i < this.listVocabulary.size(); i++) {  // The loop will be scan data in ArrayList.
@@ -150,43 +152,36 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method deleteVocabulay(). 
-     * This method will delete object in ArrayList. 
-     * In this method use: 
-     * + Method findEngLishVocabulary(): This method will be find English vocabulary by input of user. 
-     * + Method remove(): This method will be remove object in the ArrayList.
-     * @param removeInput This parameter will be contain input of user from keyboard.
+     * Method deleteVocabulay(). This method will delete object in ArrayList. In
+     * this method use: + Method findEngLishVocabulary(): This method will be
+     * find English vocabulary by input of user. + Method remove(): This method
+     * will be remove object in the ArrayList.
+     *
+     * @param removeInput This parameter will be contain input of user from
+     * keyboard.
      */
     public void deleteVocabulary(String removeInput) {
         int i = findEnglishVocabulary(removeInput); // Call method to find object.
-        if (i != -1) {  // If method findEngLishVocabulary() return diference -1 allow remove object.
-            this.listVocabulary.remove(findEnglishVocabulary(removeInput)); // Firstly remove object in the ArrayList.
-            --this.numberOfVocabulary;  // Reconount number of vocabulary.
-        } else {    // If method findEnglishVocabulary() return -1 display notification.
-            System.out.println("Delete fail!!!");   // Notification in this situation.
-        }
+        this.listVocabulary.remove(findEnglishVocabulary(removeInput)); // Firstly remove object in the ArrayList.
+        --this.numberOfVocabulary;  // Reconount number of vocabulary.
     }
-    
+
     /**
-     * Method deleteWord().
-     * This method will delete the vocabulary in the dictionary.
-     * In this method use:
-     * + Method findEnglish(): to find the value from input user.
+     * Method deleteWord(). This method will delete the vocabulary in the
+     * dictionary. In this method use: + Method findEnglish(): to find the value
+     * from input user.
+     *
      * @param removeInput This parameter will catch input of user from keyboard.
      */
     public void deleteWord(String removeInput) {
         String i = findEngLish(removeInput);    // Call method findEnglish() to find vocabulary.
-        if (i != "") {  // If return of method findEnglish() diference empty allow user delete this vocabulary.
-            this.dictionary.remove(i);  // Use method remove to remove object from HashMap.
-            System.out.println((i.substring(0, 1).toUpperCase()+i.substring(1).toLowerCase()) + " vocabulary has been removed from the dictionary."); // Notification after delete.
-        } else {    // If return of method findEnglish() is empty display notification.
-            System.out.println("Can't found this vocabulary in this vocabulary in dictionary!!!");  // Notification in this situation.
-        }
+        this.dictionary.remove(i);  // Use method remove to remove object from HashMap.
+        System.out.println((i.substring(0, 1).toUpperCase() + i.substring(1).toLowerCase()) + " vocabulary has been removed from the dictionary."); // Notification after delete.
     }
 
     /**
-     * Method displayDictionary().
-     * This method will be display all object in HashMap.
+     * Method displayDictionary(). This method will be display all object in
+     * HashMap.
      */
     public void displayDictionary() {
         System.out.println("Number of word: " + this.numberOfVocabulary);   // Display number of vocabulary.
@@ -194,17 +189,20 @@ public class VocabularyManagement {
         System.out.println("|Enlish              |Vietnamese          |");  // Display name of collum.
         System.out.println("+--------------------+--------------------+");  // Display header of the table.
         for (Map.Entry<String, String> entry : dictionary.entrySet()) { // The loop will scan all object in the HashMap.
-            String key = entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1).toLowerCase();  // This variable will contain the value of key in the HashMap.
-            String value = entry.getValue().substring(0, 1).toUpperCase() + entry.getValue().substring(1).toLowerCase();    // This variable will contain the value of key value in the HashMap.
-            System.out.printf("|%-20s|%-20s|\n", key, value);   // Display all object in the HashMap on console.
+            String key = entry.getKey();  // This variable will contain the value of key in the HashMap.
+            String value = entry.getValue();    // This variable will contain the value of key value in the HashMap.
+            System.out.printf("|%-20s|%-20s|\n",
+                    key.substring(0, 1).toUpperCase() + entry.getKey().substring(1).toLowerCase(),
+                    value.substring(0, 1).toUpperCase() + entry.getValue().substring(1).toLowerCase());   // Display all object in the HashMap on console.
         }
         System.out.println("+--------------------+--------------------+");  // The footer of the table.
     }
 
     /**
-     * Method displayDictionary(). 
-     * This method is overloading from method displayDictionary() (the method above this method). 
-     * This method use HashMap to display data. 
+     * Method displayDictionary(). This method is overloading from method
+     * displayDictionary() (the method above this method). This method use
+     * HashMap to display data.
+     *
      * @param inputTranlate
      */
     public void displayDictionary(String inputTranlate) {
@@ -215,26 +213,27 @@ public class VocabularyManagement {
                 System.out.println("+--------------------+--------------------+");  // Display header of table.
                 System.out.println("|Enlish              |Vietnamese          |");  // Display name of collum.
                 System.out.println("+--------------------+--------------------+");  // Display header of table.
-                System.out.printf("|%-20s|%-20s|\n", key.substring(0, 1).toUpperCase() + entry.getKey().substring(1).toLowerCase(), value.substring(0, 1).toUpperCase() + entry.getValue().substring(1).toLowerCase());   // Display object on console.
+                System.out.printf("|%-20s|%-20s|\n",
+                        key.substring(0, 1).toUpperCase() + entry.getKey().substring(1).toLowerCase(),
+                        value.substring(0, 1).toUpperCase() + entry.getValue().substring(1).toLowerCase());   // Display object on console.
                 System.out.println("+--------------------+--------------------+");  // Display footer of table.
-            } else {    // If input of user not equal key in HashMap display notification.
-                System.out.println("Your input: " + inputTranlate.substring(0, 1).toUpperCase() + inputTranlate.substring(1).toLowerCase() + " is incorrect please choose Tranlate and input again!!!");    // Notification in this situation.
             }
         }
     }
 
     /**
-     * Method checkVocabulary().
-     * This method will check vocabulary from input user is exist or not.
-     * This method use boolean type to return the result.
+     * Method checkVocabulary(). This method will check vocabulary from input
+     * user is exist or not. This method use boolean type to return the result.
+     *
      * @param input This parameter will get input of user from keyboard.
-     * @return true when input of user is exist, false when input of user is not exist.
+     * @return true when input of user is exist, false when input of user is not
+     * exist.
      */
     public boolean checkVocabulary(String input) {
         for (Map.Entry<String, String> entry : dictionary.entrySet()) { // The loop will be scan all object in the HashMap.
             String key = entry.getKey();    // This variable will contain value of the key.
             String value = entry.getValue();    // This variable will contain value of the value.
-            if (key.equalsIgnoreCase(input) || value.equalsIgnoreCase(input)) { // If key or value equal input return true.
+            if (input.equalsIgnoreCase(key) || input.equalsIgnoreCase(value)) { // If key or value equal input return true.
                 return true;    // Return in this situation.
             }
         }
@@ -242,69 +241,84 @@ public class VocabularyManagement {
     }
 
     /**
-     * Method findEnglishVocabulary().
-     * This method will be find vocabulary in dictionary.
-     * This method use integer type to return the result.
+     * Method findEnglishVocabulary(). This method will be find vocabulary in
+     * dictionary. This method use integer type to return the result.
+     *
      * @param removeInput This parameter will get value from input user.
      * @return i when vocabulary is exist, -1 when vocabulary is not exist.
      */
     public int findEnglishVocabulary(String removeInput) {
+        int index = 0;
         for (int i = 0; i < this.listVocabulary.size(); i++) {  // The loop will be scan all object in the ArrayList.
             Vocabulary v = this.listVocabulary.get(i);  // Create object to get each object in the ArrayList.
-            if (removeInput.equalsIgnoreCase(v.getEn())) {  // If input from user equal object in the ArrayList return index of object.
-                return i;   // Return in this situation.
+            if (removeInput.equals(v.getEn())) {  // If input from user equal object in the ArrayList return index of object.
+                index = i;   // Return in this situation.
             }
         }
-        return -1;  // Return -1 when object is not exist in the ArrayList.
+        return index;  // Return -1 when object is not exist in the ArrayList.
     }
 
     /**
-     * Method findEnglish().
-     * This method will find vocabulary in the HashMap.
+     * Method findEnglish(). This method will find vocabulary in the HashMap.
      * This method use String type to return the result.
+     *
      * @param removeInput This parameter will catch value from input of user.
-     * @return key in HashMap when vocabulary is exist, empty String when key in HashMap is not exist.
+     * @return key in HashMap when vocabulary is exist, empty String when key in
+     * HashMap is not exist.
      */
     public String findEngLish(String removeInput) {
+        String word = null;
         for (Map.Entry<String, String> entry : dictionary.entrySet()) { // The loop will scan all object in the HashMap.
             String key = entry.getKey();    // This variable will get key in the HashMap.
             String value = entry.getValue();    // This variable will gey value in the HashMap.
-            if (key.equalsIgnoreCase(removeInput)) { // If the key is equal the input from user return that key.
-                return key; // Return in this situation.
+            if (key.equals(removeInput)) { // If the key is equal the input from user return that key.
+                word = key; // Return in this situation.
             }
         }
-        return "";  // Return empty String when key is not exist in the HashMap. 
+        return word;  // Return empty String when key is not exist in the HashMap. 
+    }
+
+    public boolean checkVietnamese(String input) {
+        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (input.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Method checkVocabularyList().
-     * This method will check the ArrayList is empty or not.
-     * This method use boolean type to return the result.
-     * @return true when the ArrayList is empty, false when the ArrayList is not empty.
+     * Method checkVocabularyList(). This method will check the ArrayList is
+     * empty or not. This method use boolean type to return the result.
+     *
+     * @return true when the ArrayList is empty, false when the ArrayList is not
+     * empty.
      */
     public boolean checkVocabularyList() {
         return this.listVocabulary.isEmpty() || this.numberOfVocabulary == 0;   // Return true when the ArrayList is empty, false when the ArrayList is not empty.
     }
 
     /**
-     * Method checkDictionary().
-     * This method will check the HashMap is empty or not.
-     * This method use boolean type to return the result.
-     * @return true when the HashMap is empty, false when the HashMap is not empty.
+     * Method checkDictionary(). This method will check the HashMap is empty or
+     * not. This method use boolean type to return the result.
+     *
+     * @return true when the HashMap is empty, false when the HashMap is not
+     * empty.
      */
     public boolean checkDictionary() {
         return this.dictionary.isEmpty();   // Return true when the HashMap is empty, false when the HashMap is not empty.
     }
 
     /**
-     * Method inputFindString().
-     * This method will allow user input from keyboard.
-     * This method use String type to return the result.
-     * In this method will use:
-     * + Method isEmpty(): to check the input of user is empty or not.
-     * + ReGex VOCABULARY_VALIDATION: to check format of user input.
-     * + Method matches(): to check input of user is correct format or not.
-     * + Method checkVocabulary(): to check input of user is exist or not.
+     * Method inputFindString(). This method will allow user input from
+     * keyboard. This method use String type to return the result. In this
+     * method will use: + Method isEmpty(): to check the input of user is empty
+     * or not. + ReGex VOCABULARY_VALIDATION: to check format of user input. +
+     * Method matches(): to check input of user is correct format or not. +
+     * Method checkVocabulary(): to check input of user is exist or not.
+     *
      * @return input The value of user input from keyboard.
      */
     public String inputFindString() {
@@ -325,25 +339,28 @@ public class VocabularyManagement {
                 }
                 if (checkVocabulary(input) == false) {  // If method checkVocabulary() equal false display notification.
                     flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
-                    System.out.println(input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase() + " is not exist in the dictionary!!!");   // Notification in this situation.
+                    System.out.println(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase() + " is not exist in the dictionary!!!");   // Notification in this situation.
+                }
+                if (checkVietnamese(input)) {
+                    flag = true;
+                    System.out.println("You should search english to find you words!!!");
                 }
             } catch (Exception e) { // Catch exception if have throw exception.
                 flag = true;    // Flag will bew true to display notification and allow user input from keyboard again.
                 System.out.println("Input fail!!!");    // Notification in this situation.
             }
         } while (flag == true); // The loop will be loop when flag is true.
-        return input;   // Return input of user from keyboard.
+        return input.toLowerCase();   // Return input of user from keyboard.
     }
 
     /**
-     * Method inputStringEN().
-     * This method will allow user input from keyboard.
-     * This method use String type to return the result.
-     * In this method will use:
-     * + Method isEmpty(): to check the input of user is empty or not.
-     * + ReGex VOCABULARY_VALIDATION: to check format of user input.
-     * + Method matches(): to check input of user is correct format or not.
-     * + Method checkVocabulary(): to check input of user is exist or not.
+     * Method inputStringEN(). This method will allow user input from keyboard.
+     * This method use String type to return the result. In this method will
+     * use: + Method isEmpty(): to check the input of user is empty or not. +
+     * ReGex VOCABULARY_VALIDATION: to check format of user input. + Method
+     * matches(): to check input of user is correct format or not. + Method
+     * checkVocabulary(): to check input of user is exist or not.
+     *
      * @return
      */
     public String inputStringEN() {
@@ -364,25 +381,24 @@ public class VocabularyManagement {
                 }
                 if (checkVocabulary(input) == true) {    // If method checkVocabulary() equal true display notification.
                     flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
-                    System.out.println(input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase() + " is exit in the dictionary!!!");    // Notification in this situation.
+                    System.out.println(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase() + " is exit in the dictionary!!!");    // Notification in this situation.
                 }
             } catch (Exception e) { // Catch exception if have throw exception.
                 flag = true;    // Flag will bew true to display notification and allow user input from keyboard again.
                 System.out.println("Input fail!!!");    // Notification in this situation.
             }
         } while (flag == true); // The loop will be loop when flag is true.
-        return input;   // Return input of user from keyboard.
+        return input.toLowerCase();   // Return input of user from keyboard.
     }
 
     /**
-     * Method inputStringVN().
-     * This method will allow user input from keyboard.
-     * This method use String type to return the result.
-     * In this method will use:
-     * + Method isEmpty(): to check the input of user is empty or not.
-     * + ReGex VOCABULARY_VALIDATION: to check format of user input.
-     * + Method matches(): to check input of user is correct format or not.
-     * + Method checkVocabulary(): to check input of user is exist or not.
+     * Method inputStringVN(). This method will allow user input from keyboard.
+     * This method use String type to return the result. In this method will
+     * use: + Method isEmpty(): to check the input of user is empty or not. +
+     * ReGex VOCABULARY_VALIDATION: to check format of user input. + Method
+     * matches(): to check input of user is correct format or not. + Method
+     * checkVocabulary(): to check input of user is exist or not.
+     *
      * @return
      */
     public String inputStringVN() {
@@ -403,13 +419,13 @@ public class VocabularyManagement {
                 }
                 if (checkVocabulary(input) == true) {
                     flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
-                    System.out.println(input.substring(0,1).toUpperCase() + input.substring(1).toLowerCase() + " is exit in the dictionary!!!");
+                    System.out.println(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase() + " is exit in the dictionary!!!");
                 }
             } catch (Exception e) { // Catch exception if have throw exception.
                 flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
                 System.out.println("Input fail!!!");    // Notification in this situation.
             }
         } while (flag == true); // The loop will be loop when flag is true.
-        return input;   // Return input of user from keyboard.
+        return input.toLowerCase();   // Return input of user from keyboard.
     }
 }

@@ -59,6 +59,7 @@ public class S15Dictionary {
                         String vn = vm.inputStringVN();
                         vm.addVocabulary(en, vn);
                         vm.putVocabularyToDictionary();
+                        vm.displayDictionary();
                         break;
                     case 2: // Case 2 feature Delete word.
                         if (vm.checkVocabularyList() == true) {
