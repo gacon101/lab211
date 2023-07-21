@@ -25,7 +25,7 @@ public class VocabularyManagement {
     private HashMap<String, String> dictionary;
     private int numberOfVocabulary;
     private String DICTIONARY_FILE;
-    private final String VOCABULARY_VALIDATION = "^[A-Za-z\\s]{2,20}$";
+    private final String VOCABULARY_VALIDATION = "^[A-Za-z\\s]{1,20}$";
     private Scanner sc = new Scanner(System.in);
 
     /**
@@ -203,22 +203,23 @@ public class VocabularyManagement {
      * displayDictionary() (the method above this method). This method use
      * HashMap to display data.
      *
-     * @param inputTranlate
+     * @param inputTranlate input of user to translate.
      */
     public void displayDictionary(String inputTranlate) {
+        System.out.println("+--------------------+--------------------+");  // Display header of table.
+        System.out.println("|Enlish              |Vietnamese          |");  // Display name of collum.
+        System.out.println("+--------------------+--------------------+");  // Display header of table.
         for (Map.Entry<String, String> entry : dictionary.entrySet()) { // The loop will scan all object in HashMap.
             String key = entry.getKey();  // This variable will get value in HashMap.
             String value = entry.getValue();    // This variable will get value in HashMap.
             if (key.contains(inputTranlate)) {  // If input of user equal key in HashMap display object on console.
-                System.out.println("+--------------------+--------------------+");  // Display header of table.
-                System.out.println("|Enlish              |Vietnamese          |");  // Display name of collum.
-                System.out.println("+--------------------+--------------------+");  // Display header of table.
+
                 System.out.printf("|%-20s|%-20s|\n",
                         key.substring(0, 1).toUpperCase() + entry.getKey().substring(1).toLowerCase(),
                         value.substring(0, 1).toUpperCase() + entry.getValue().substring(1).toLowerCase());   // Display object on console.
-                System.out.println("+--------------------+--------------------+");  // Display footer of table.
             }
         }
+        System.out.println("+--------------------+--------------------+");  // Display footer of table.
     }
 
     /**
@@ -278,15 +279,23 @@ public class VocabularyManagement {
         return word;  // Return empty String when key is not exist in the HashMap. 
     }
 
+    /**
+     * checkVietnamese(). This method check input of user. If user enter
+     * Vietnamese in field English.
+     *
+     * @param input This parameter will catch input of user.
+     * @return true when input of user is Vietnamese, false when input of user
+     * is English.
+     */
     public boolean checkVietnamese(String input) {
-        for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if (input.equals(value)) {
-                return true;
+        for (Map.Entry<String, String> entry : dictionary.entrySet()) { // The loop will scan all words in the HashMap.
+            String key = entry.getKey();    // This variable will contain data of key.
+            String value = entry.getValue();    // This variable will contain data of value.  
+            if (input.equalsIgnoreCase(value)) {  // If input of user equal variable value return true.
+                return true;    // Return in this situation.
             }
         }
-        return false;
+        return false;   // Return false when input of user not equal variable value.
     }
 
     /**
@@ -322,7 +331,7 @@ public class VocabularyManagement {
      * @return input The value of user input from keyboard.
      */
     public String inputFindString() {
-        String input = "";  // This variable will catch the input of user from keyboard.
+        String input = null;  // This variable will catch the input of user from keyboard.
         boolean flag = true;    // Flag will check the loop when input user incorrect.
         do {    // do...while the loop will loop when input of user is incorrect.
             try {   // try...catch to catch the exception when input of user is incorrect.
@@ -337,13 +346,9 @@ public class VocabularyManagement {
                     flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
                     System.out.println("Input incorrect format!!!");    // Notification in this situation.
                 }
-                if (checkVocabulary(input) == false) {  // If method checkVocabulary() equal false display notification.
-                    flag = true;    // Flag will be true to display notification and allow user input from keyboard again.
-                    System.out.println(input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase() + " is not exist in the dictionary!!!");   // Notification in this situation.
-                }
-                if (checkVietnamese(input)) {
-                    flag = true;
-                    System.out.println("You should search english to find you words!!!");
+                if (checkVietnamese(input) == true) {   // If method checkVietnamese equal true display notification.
+                    flag = true;    // Variable flag will be true for allow user input again.
+                    System.out.println("You should search english to find you words!!!"); // Notification in this situation.
                 }
             } catch (Exception e) { // Catch exception if have throw exception.
                 flag = true;    // Flag will bew true to display notification and allow user input from keyboard again.
@@ -361,10 +366,10 @@ public class VocabularyManagement {
      * matches(): to check input of user is correct format or not. + Method
      * checkVocabulary(): to check input of user is exist or not.
      *
-     * @return
+     * @return input the value of user from keyboard.
      */
     public String inputStringEN() {
-        String input = "";  // This variable will catch the input of user from keyboard.
+        String input = null;  // This variable will catch the input of user from keyboard.
         boolean flag = true;    // Flag will check the loop when input user incorrect.
         do {    // do...while the loop will loop when input of user is incorrect.
             try {   // try...catch to catch the exception when input of user is incorrect.
@@ -399,10 +404,10 @@ public class VocabularyManagement {
      * matches(): to check input of user is correct format or not. + Method
      * checkVocabulary(): to check input of user is exist or not.
      *
-     * @return
+     * @return input The value of user input from keyboard.
      */
     public String inputStringVN() {
-        String input = "";  // This variable will catch the input of user from keyboard.
+        String input = null;  // This variable will catch the input of user from keyboard.
         boolean flag = true;    // Flag will check the loop when input user incorrect.
         do {    // do...while the loop will loop when input of user is incorrect.
             try {   // try...catch to catch the exception when input of user is incorrect.

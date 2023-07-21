@@ -55,34 +55,45 @@ public class S15Dictionary {
                 } while (flag == true); // The loop will be loop when flag is true.
                 switch (Integer.parseInt(choice)) { // stwitch...case to create feature for menu.
                     case 1: // Case 1 feature Add new word.
-                        String en = vm.inputStringEN();
-                        String vn = vm.inputStringVN();
-                        vm.addVocabulary(en, vn);
-                        vm.putVocabularyToDictionary();
-                        vm.displayDictionary();
+                        boolean check = true;   // This variable will check the loop.
+                        String en = null;   // This variable will contain data of English.
+                        String vn = null;   // This variable will contain data of Vietnamese.
+                        do {    // do...while will loop when user input incorrect.
+                            check = false;  // Variable check will be false for user enter from keyboard.
+                            en = vm.inputStringEN();    // Call method for user input from keyboard.
+                            vn = vm.inputStringVN();    // Call method for user input from keyboard.
+                            if (en.equals(vn)) {    // If English equal Vietnamese display notification.
+                                check = true;   // Variable check will be true for user input agian.
+                                System.out.println("Vietnamese can't be match English!!!"); // Notification in this situation.
+                            }
+                        } while (check == true);    // The loop will be loop when variable check will be true. 
+                  
+                        vm.addVocabulary(en, vn);   // Call method addVocabulary() to add words into the ArrayList.
+                        vm.putVocabularyToDictionary(); // Call method putVocabularyToDictionary() to put word into the HashMap.
+                        vm.displayDictionary(); // Call method displayDictionary() to display all word in the dictionary.
                         break;
                     case 2: // Case 2 feature Delete word.
-                        if (vm.checkVocabularyList() == true) {
-                            System.out.println("Dictionary is empty!!!");
-                        } else {
-                            vm.displayDictionary();
-                            String removeInput = vm.inputFindString();
-                            vm.deleteVocabulary(removeInput);
-                            vm.deleteWord(removeInput);
-                            if (vm.checkDictionary() == true) {
-                                System.out.println("Dictionary is empty!!!");
+                        if (vm.checkVocabularyList() == true) { // Call method checkVocabularyList() to check is empty or not.
+                            System.out.println("Dictionary is empty!!!");   // Notification in this situation.
+                        } else { // If is not empty allow user delete words in dictionary.
+                            vm.displayDictionary(); // Call method displayDictionary() to display all word in the dictionary.
+                            String removeInput = vm.inputFindString();  // Call method to allow user input from keyboard.
+                            vm.deleteVocabulary(removeInput);   // Call method to delete word in ArrayList.
+                            vm.deleteWord(removeInput); // Call method to delete word in HashMap.
+                            if (vm.checkDictionary() == true) { // Call method to check dictionary is empty or not.
+                                System.out.println("Dictionary is empty!!!");   // Notification in this situation.
                             } else {
-                                vm.displayDictionary();
+                                vm.displayDictionary(); // Call method displayDictionary() to display all word in the dictionary.
                             }
                         }
                         break;
 
                     case 3: // Case 3 feature Search word.
-                        if (vm.checkDictionary() == true) {
-                            System.out.println("Dictionary is empty!!!");
-                        } else {
-                            String inputTranlate = vm.inputFindString();
-                            vm.displayDictionary(inputTranlate);
+                        if (vm.checkDictionary() == true) { // Call method to check dictionary is empty or not.
+                            System.out.println("Dictionary is empty!!!");   // Notification in this situation.
+                        } else {    // If dictionary isn't empty allow user translate the word.
+                            String inputTranlate = vm.inputFindString();    // Call method for user input from keyboard.
+                            vm.displayDictionary(inputTranlate);    //  Call method to display the word after translate.
                         }
                         break;
                     case 4: // Case 4 feature Exit.
